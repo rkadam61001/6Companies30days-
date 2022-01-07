@@ -1,0 +1,36 @@
+//https://practice.geeksforgeeks.org/problems/nuts-and-bolts-problem0431/1#
+class Solution{
+public:	
+
+	void matchPairs(char nuts[], char bolts[], int n) {
+	    // code here
+	    char tmp[]={'!','#','$','%','&','*','@','^','~'};
+	    unordered_map<char,int>mp;
+	    for(int i=0;i<n;i++)
+	    {
+	        mp[nuts[i]]++;
+	        mp[bolts[i]]++;
+	    }
+	   
+	   int i=0;
+	    for(int j=0;j<9;j++)
+	    {
+	        if(mp.find(tmp[j])!=mp.end())
+	        {
+	                if(mp[tmp[j]]==2)
+	                {
+	                    
+    	                  nuts[i]=tmp[j];
+    	                  bolts[i]=tmp[j];  
+    	                  i++;
+	                    
+	                }
+	        
+	           
+	        }
+	    }
+	    
+	    
+	}
+
+};
