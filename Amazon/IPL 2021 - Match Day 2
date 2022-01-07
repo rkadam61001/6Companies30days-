@@ -1,0 +1,34 @@
+//https://practice.geeksforgeeks.org/problems/deee0e8cf9910e7219f663c18d6d640ea0b87f87/1/#
+//brute force
+ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        int maxi;
+        vector<int>v;
+        for(int i=0;i<=nums.size()-k;i++)
+        {
+           q.push(nums[i]);
+            for(int j=1;j<k;j++)
+            {
+              maxi=max(maxi,nums[i+j]);
+          
+            }
+                  v.push_back(maxi);
+            //maxi=INT_MIN;
+        }
+        return v;
+ }
+ 
+ //sliding window
+ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+   deque<int> dq;
+        vector<int> ans;
+        for (int i=0; i<nums.size(); i++) {
+            if (!dq.empty() && dq.front() == i-k) dq.pop_front();
+            
+            while (!dq.empty() && nums[dq.back()] < nums[i])
+                dq.pop_back();
+            
+            dq.push_back(i);
+            if (i>=k-1) ans.push_back(nums[dq.front()]);
+        }
+        return ans;
+    }
