@@ -1,0 +1,35 @@
+//https://leetcode.com/problems/longest-mountain-in-array/
+class Solution {
+public:
+    int longestMountain(vector<int>& arr) {
+        int res=0;
+        int cnt;
+        int i,j;
+        bool flg=false;
+        for(i=1;i<arr.size();i++)
+        {
+            j=i;
+            cnt=1;
+            flg=false;
+            while(j<arr.size()&&arr[j]>arr[j-1])
+            {
+                j++;
+                cnt++;
+            }
+            while(i!=j&&j<arr.size()&&arr[j-1]>arr[j])
+            {
+                j++;
+                cnt++;
+                flg=true;
+            }
+            if(i!=j&&flg&&cnt>2)
+            {
+                res=max(res,cnt);
+                j--;
+            }
+            i=j;
+        }
+       return res;
+        
+    }
+};
