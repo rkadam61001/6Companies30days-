@@ -1,0 +1,35 @@
+//https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1#
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+		    // Code here
+		    string ans="";
+		   
+		    vector<int>freq(26,0);
+		    vector<char>ov;
+		    for(int i=0;i<A.length();i++)
+		    {
+		        if(!freq[A[i]-'a'])
+		        {
+		            ov.push_back(A[i]);
+		        }
+		         int flg=0;
+		        freq[A[i]-'a']++;
+		        for(int j=0;j<ov.size();j++)
+		        {
+		            if(freq[ov[j]-'a']==1)
+		            {
+		                ans.push_back(ov[j]);
+		                flg=1;
+		                break;
+		            }
+		        }
+		        if(flg==0)
+		        {
+		            ans.push_back('#');
+		        }
+		    }
+		    return ans;
+		}
+
+};
