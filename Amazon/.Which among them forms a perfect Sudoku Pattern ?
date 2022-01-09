@@ -1,0 +1,34 @@
+//https://practice.geeksforgeeks.org/problems/is-sudoku-valid4820/1/
+class Solution{
+public:
+    int isValid(vector<vector<int>> mat){
+        vector<string>v;
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(mat[i][j]!=0)
+                {
+                    string s1="",s2="",s3="";
+                    s1+="row"+to_string(i)+to_string(mat[i][j]);
+                    s2+="col"+to_string(j)+to_string(mat[i][j]);
+                    s3+="box"+to_string((i/3)*3+(j/3))+to_string(mat[i][j]);
+                    auto it1=find(v.begin(),v.end(),s1);
+                    auto it2=find(v.begin(),v.end(),s2);
+                    auto it3=find(v.begin(),v.end(),s3);
+                    if(it1==v.end()&&it2==v.end()&&it3==v.end())
+                    {
+                        v.push_back(s1);
+                        v.push_back(s2);
+                        v.push_back(s3);
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+            }
+        }
+        return 1;
+        // code here
+    }
+};
