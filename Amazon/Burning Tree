@@ -1,0 +1,92 @@
+//https://practice.geeksforgeeks.org/problems/burning-tree/1/#
+class Solution {
+  public:
+     int burning(map<Node *,Node *>&mp,Node *add)
+  {
+      queue<Node *>current;
+      current.push(add);
+      int t=0;
+      unordered_map<Node *,int>visited;
+      visited[add]=1;
+      while(!current.empty())
+      {
+          int sz=current.size();
+          int flg=0;
+          for(int i=0;i<sz;i++)
+          {
+              Node *a=current.front();
+              current.pop();
+              if(a->left&&!visited[a->left])
+              {
+                  current.push(a->left);
+                  visited[a->left]=1;
+                  flg=1;
+              }
+              if(a->right&&!visited[a->right])
+              {
+                  current.push(a->right);
+                  visited[a->right]=1;
+                  flg=1;
+              }
+              if(mp[a]&&!visited[mp[a]])
+              {
+                  visited[mp[a]]=1;
+                  current.push(mp[a]);
+                  flg=1;
+              }
+          }
+          if(flg==1)
+          {
+              t++;
+          }
+      }
+      return t;
+  }
+   void findparent(Node *root,map<Node *,Node *>&mp)
+   {
+       queue<Node *>q;
+       q.push(root);
+       while(!q.empty()){
+           Node *curr=q.front();
+           q.pop();
+           if(curr->left)
+           {
+               mp[curr->left]=curr;
+               q.push(curr->left);
+           }
+           if(curr->right)
+           {
+               mp[curr->right]=curr;
+               q.push(curr->right);
+           }
+       }
+   }
+   Node *address(Node *root,int target)
+   {
+       if(root==NULL)
+       {
+           return NULL;
+       }
+       if(root->data==target)
+       {
+           return root;
+       }
+       Node *l=address(root->left,target);
+       if(l==NULL)
+       {
+             return address(root->right,target);
+       }
+       return l;
+     
+   }
+    int minTime(Node* root, int target) 
+    {
+        // Your code goes here
+        map<Node *,Node *>mp;
+        queue<Node *>qu;
+        findparent(root,mp);
+        Node *add=address(root,target);
+        int maxi=burning(mp,add);
+        return maxi;
+    }
+};
