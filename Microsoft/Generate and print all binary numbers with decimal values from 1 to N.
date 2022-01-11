@@ -1,0 +1,17 @@
+//https://practice.geeksforgeeks.org/problems/generate-binary-numbers-1587115620/1/
+vector<string> generate(int N)
+{
+	// Your code here
+	queue<string>q;
+	vector<string>v;
+	q.push("1");
+	for(int i=1;i<=N;i++)
+	{
+	    string f=q.front();
+	    q.pop();
+	    v.push_back(f);
+	    q.push(f+"0");
+	    q.push(f+"1");
+	}
+	return v;
+}
