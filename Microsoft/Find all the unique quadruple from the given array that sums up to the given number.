@@ -1,0 +1,63 @@
+//https://practice.geeksforgeeks.org/problems/find-all-four-sum-numbers1732/1#
+class Solution{
+    public:
+    // arr[] : int input array of integers
+    // k : the quadruple sum required
+    vector<vector<int> > fourSum(vector<int> &arr, int k) {
+        // Your code goes here
+        sort(arr.begin(),arr.end());
+       // set<vector<int>>s;
+        vector<vector<int>>ans;
+       // vector<int>v;
+        int i ,j,l,h;
+        int n=arr.size();
+        for(i=0;i<n;i++)
+        {
+            for(j=i+1;j<n;j++)
+            {
+                l=j+1;
+                h=n-1;
+                while(l<h)
+                {
+                     int sum=arr[i]+arr[j]+arr[l]+arr[h];
+                    if(sum==k)
+                    {
+                     
+                       vector<int>v(4,0);
+                        v[0]=arr[i];
+                        v[1]=arr[j];
+                        v[2]=arr[l];
+                        v[3]=arr[h];
+                        ans.push_back(v);
+                      
+                       while(l<h&&v[2]==arr[l]){
+                           l++;
+                       }
+                       while(l<h&&arr[h]==v[3]){
+                           h--;
+                       }
+                      
+                    }
+                    else if(sum>k)
+                    {
+                        h--;
+                    }
+                    else{
+                        l++;
+                    }
+                    
+                }
+                while(j+1<n&&arr[j+1]==arr[j]){
+                    j++;
+                }
+                while(i+1<n&&arr[i+1]==arr[i])
+                {
+                    i++;
+                }
+               
+            }
+        }
+     
+        return ans;
+    }
+};
