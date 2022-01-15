@@ -1,0 +1,41 @@
+//https://practice.geeksforgeeks.org/problems/possible-words-from-phone-digits-1587115620/1/#
+class Solution
+{
+    public:
+    //Function to find list of all words possible by pressing given numbers.
+    vector<string>codes={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string>getWords(string str)
+    {
+        if(str.length()==0)
+        {
+           vector<string>bres;
+           bres.push_back("");
+           return bres;
+        }
+        char firstchar=str[0];
+        string restchar=str.substr(1);
+        vector<string>rres=getWords(restchar);
+        vector<string>v;
+        string codefirst=codes[firstchar-'0'];
+        for(int i=0;i<codefirst.length();i++)
+        {
+            char ch=codefirst[i];
+            for(string c:rres)
+            {
+                v.push_back(ch+c);
+            }
+        }
+        return v;
+    }
+    vector<string> possibleWords(int a[], int N)
+    {
+        //Your code here
+        string str;
+        for(int i=0;i<N;i++)
+        {
+            str.push_back(a[i]+'0');
+        }
+        vector<string>ans=getWords(str);
+        return ans;
+    }
+};
