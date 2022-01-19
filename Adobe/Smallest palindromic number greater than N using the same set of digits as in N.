@@ -1,0 +1,25 @@
+//https://practice.geeksforgeeks.org/problems/next-higher-palindromic-number-using-the-same-set-of-digits5859/1/#
+class Solution{
+  public:
+    string nextPalin(string N) { 
+        //complete the function here
+       int n=N.length();
+       if(n<=2)
+       {
+           return "-1";
+       }
+       string fhalf=N.substr(0,n/2);
+       if(next_permutation(fhalf.begin(),fhalf.end()))
+       {
+           string ans=fhalf;
+           if(n&1)
+           {
+               fhalf+=N[n/2];
+           }
+           reverse(fhalf.begin(),fhalf.end());
+           return ans+=fhalf;
+           
+       }
+       return "-1";
+    }
+};
