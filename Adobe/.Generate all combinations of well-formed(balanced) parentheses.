@@ -1,0 +1,35 @@
+//https://practice.geeksforgeeks.org/problems/generate-all-possible-parentheses/1/#
+class Solution
+{
+    public:
+    void solve(string s,int open,int close,vector<string>&v)
+    {
+        if(open==0&&close==0)
+        {
+           v.push_back(s);
+           return;
+        }
+        if(open!=0)
+        {
+            string tmp=s;
+            tmp.push_back('(');
+            solve(tmp,open-1,close,v);
+        }
+        if(close>open)
+        {
+            string op2=s;
+            op2.push_back(')');
+            solve(op2,open,close-1,v);
+        }
+    }
+    vector<string> AllParenthesis(int n) 
+    {
+        // Your code goes here 
+        string s;
+        vector<string>v;
+        int open=n;
+        int close=n;
+        solve(s,open,close,v);
+        return v;
+    }
+};
